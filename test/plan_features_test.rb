@@ -28,14 +28,14 @@ class PlanFeaturesTest < ActiveSupport::TestCase
     assert second_plan.has_feature?("feature_a")
     assert second_plan.has_feature?("feature_b")
     assert second_plan.has_feature?("feature_c")
-    assert_equal 1, second_plan.features.length
-    assert_equal 3, second_plan.previous_features.length
+    assert_equal 2, second_plan.features.length
+    assert_equal 4, second_plan.previous_features.length
 
     third_plan = @plans.third
     assert_equal "Business", third_plan.name
     assert_equal "business", third_plan.plan_identifier
     # Third plan does not have any previous plans, so it only has one feature
-    assert_equal 1, third_plan.features.length
+    assert_equal 2, third_plan.features.length
     assert_equal 0, third_plan.previous_features.length
     assert third_plan.has_feature?("feature_d")
     refute third_plan.has_feature?("feature_a")
@@ -69,6 +69,14 @@ class PlanFeaturesTest < ActiveSupport::TestCase
   test "display_features does not return hidden features" do
     plan = @plans.first
 
-    assert_equal 2, plan.display_features.length
+    assert_equal 3, plan.display_features.length
+  end
+
+  test "check the limit of a feature" do
+    first_plan = @plans.first
+    assert_equal 10, first_plan.limit_for(:limit_feature)
+
+    second_plan = @plans.second
+    assert_equal 20, second_plan.limit_for(:limit_feature)
   end
 end

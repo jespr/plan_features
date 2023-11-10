@@ -8,12 +8,18 @@ free:
     hidden_feature:
       description: "Hidden feature"
       hidden: true
+    limit_feature:
+      description: "Feature with a limit"
+      limit: 10
 simple:
   name: "Simple"
   previous: free
   features:
     feature_c:
       description: "Feature C"
+    limit_feature:
+      description: "Feature with a limit"
+      limit: 20
 business:
   name: "Business"
   features:
@@ -28,3 +34,18 @@ paid:
     yearly:
       product: DEF
       amount: 5000
+one:
+  name: "One"
+  features:
+    forms:
+      description: "1 Form"
+      amount: 1
+two:
+  name: "Two"
+  previous: one
+  features:
+    something_else:
+      description: "Something else"
+    forms:
+      description: "2 Forms"
+      amount: 2

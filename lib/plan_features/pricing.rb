@@ -64,8 +64,8 @@ module PlanFeatures
       end
     end
 
-    def amount_for(feature)
-      features.dig(feature.to_s, "amount")
+    def limit_for(feature)
+      features.dig(feature.to_s, "limit")
     end
 
     def free?
@@ -108,10 +108,23 @@ module PlanFeatures
     end
 
     def display_features
+      # We want to sort features so they match the order
+      # of the previous_features (if any)
+      sorted_features = if previous_features.any?
+        previous_features.sort_by do |element|
+          previous_features.find_index do |identifier, _|
+            element.first == identifier
+          end || previous_features.length
+        end
+      else
+        features
+      end
+
       features.map do |identifier, attributes|
         PricingFeatures::Feature.new(
+          identifier: identifier,
           description: attributes["description"],
-          amount: attributes["amount"],
+          limit: attributes["limit"],
           hidden: attributes["hidden"],
         )
       end.compact.filter{|f| !f.hidden? }
