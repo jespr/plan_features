@@ -5,8 +5,8 @@ Gem::Specification.new do |spec|
   spec.version     = PlanFeatures::VERSION
   spec.authors     = ["Jesper Christiansen"]
   spec.email       = ["hi@jespr.com"]
-  spec.summary     = "Summary of PlanFeatures."
-  spec.description = "Description of PlanFeatures."
+  spec.summary     = "Add Plan feature configuration to your Rails app"
+  spec.description = "Define plans and their features in a YAML file and use them in your Rails app"
   spec.license     = "MIT"
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
