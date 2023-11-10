@@ -79,14 +79,6 @@ module PlanFeatures
       prices[name.to_s]["product"]
     end
 
-    def monthly_pricing_id
-      pricing_id(name: :monthly)
-    end
-
-    def yearly_pricing_id
-      pricing_id(name: :yearly)
-    end
-
     def price(name: :monthly)
       return nil if prices.nil?
       prices[name.to_s]["amount"] / 100
