@@ -1,5 +1,6 @@
 require "plan_features/version"
 require "plan_features/railtie"
+require "plan_features/pricing"
 require "plan_features/configuration"
 
 module PlanFeatures
