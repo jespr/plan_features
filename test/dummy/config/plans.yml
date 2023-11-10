@@ -1,0 +1,30 @@
+free:
+  name: "Free"
+  features:
+    feature_a:
+      description: "Feature A"
+    feature_b:
+      description: "Feature B"
+    hidden_feature:
+      description: "Hidden feature"
+      hidden: true
+simple:
+  name: "Simple"
+  previous: free
+  features:
+    feature_c:
+      description: "Feature C"
+business:
+  name: "Business"
+  features:
+    feature_d:
+      description: "Feature D"
+paid:
+  name: "Paid"
+  prices:
+    monthly:
+      product: ABC
+      amount: 500
+    yearly:
+      product: DEF
+      amount: 5000
