@@ -35,7 +35,7 @@ class PlanFeaturesTest < ActiveSupport::TestCase
     assert_equal "Business", third_plan.name
     assert_equal "business", third_plan.plan_identifier
     # Third plan does not have any previous plans, so it only has one feature
-    assert_equal 2, third_plan.features.length
+    assert_equal 1, third_plan.features.length
     assert_equal 0, third_plan.previous_features.length
     assert third_plan.has_feature?("feature_d")
     refute third_plan.has_feature?("feature_a")
