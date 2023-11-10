@@ -20,7 +20,6 @@ class PlanFeaturesTest < ActiveSupport::TestCase
     refute first_plan.has_feature?("feature_c")
     assert 2, first_plan.features.length
 
-
     second_plan = @plans.second
     assert_equal "Simple", second_plan.name
     assert_equal "simple", second_plan.plan_identifier

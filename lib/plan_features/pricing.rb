@@ -7,11 +7,9 @@ module PlanFeatures
     include ActiveModel::Model
 
     def self.boosts
-     @boosts ||= begin
-      if File.exist?(Rails.root.join("config", "account_boosts.yml"))
+      @boosts ||= if File.exist?(Rails.root.join("config", "account_boosts.yml"))
         YAML.load_file(Rails.root.join("config", "account_boosts.yml"))
       end
-     end
     end
 
     def self.find_by_identifier(id)
@@ -76,14 +74,6 @@ module PlanFeatures
       prices&.any?
     end
 
-    def pricing_id(interval = "monthly")
-      if interval == "monthly"
-        monthly_pricing_id
-      else
-        yearly_pricing_id
-      end
-    end
-
     def pricing_id(name: :monthly)
       return nil if prices.nil?
       prices[name.to_s]["product"]
@@ -108,26 +98,14 @@ module PlanFeatures
     end
 
     def display_features
-      # We want to sort features so they match the order
-      # of the previous_features (if any)
-      sorted_features = if previous_features.any?
-        previous_features.sort_by do |element|
-          previous_features.find_index do |identifier, _|
-            element.first == identifier
-          end || previous_features.length
-        end
-      else
-        features
-      end
-
       features.map do |identifier, attributes|
         PricingFeatures::Feature.new(
           identifier: identifier,
           description: attributes["description"],
           limit: attributes["limit"],
-          hidden: attributes["hidden"],
+          hidden: attributes["hidden"]
         )
-      end.compact.filter{|f| !f.hidden? }
+      end.compact.filter { |f| !f.hidden? }
     end
   end
 end
