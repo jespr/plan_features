@@ -78,4 +78,9 @@ class PlanFeaturesTest < ActiveSupport::TestCase
     second_plan = @plans.second
     assert_equal 20, second_plan.limit_for(:limit_feature)
   end
+
+  test "metadata" do
+    plan = PlanFeatures::Pricing.find_by_identifier(:simple)
+    assert plan.metadata[:popular]
+  end
 end

@@ -100,6 +100,17 @@ paid_plan.limit_for(:posts)
 # => 50
 ```
 
+### Metadata
+
+You can add metadata to a plan by using the `metadata` key. Example:
+
+```
+paid:
+  name: "Paid"
+  metadata:
+    popular: true
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:

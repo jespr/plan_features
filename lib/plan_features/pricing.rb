@@ -2,7 +2,7 @@ require_relative "feature"
 
 module PlanFeatures
   class Pricing
-    attr_accessor :name, :plan_identifier, :interval, :stripe_id, :features, :prices, :previous, :popular
+    attr_accessor :name, :plan_identifier, :interval, :stripe_id, :features, :prices, :previous, :metadata
 
     include ActiveModel::Model
 
@@ -29,11 +29,11 @@ module PlanFeatures
       @all_plans ||= YAML.load_file(::PlanFeatures.configuration.plans_file_path).map do |plan, attributes|
         Pricing.new(
           plan_identifier: plan,
-          popular: attributes["popular"],
           name: attributes["name"],
           features: attributes["features"],
           prices: attributes["prices"],
-          previous: attributes["previous"]
+          previous: attributes["previous"],
+          metadata: attributes["metadata"]&.with_indifferent_access,
         )
       end
     end
