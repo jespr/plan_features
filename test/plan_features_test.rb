@@ -27,7 +27,7 @@ class PlanFeaturesTest < ActiveSupport::TestCase
     assert second_plan.has_feature?("feature_a")
     assert second_plan.has_feature?("feature_b")
     assert second_plan.has_feature?("feature_c")
-    assert_equal 2, second_plan.features.length
+    assert_equal 3, second_plan.features.length
     assert_equal 4, second_plan.previous_features.length
 
     third_plan = @plans.third
@@ -82,5 +82,10 @@ class PlanFeaturesTest < ActiveSupport::TestCase
   test "metadata" do
     plan = PlanFeatures::Pricing.find_by_identifier(:simple)
     assert plan.metadata[:popular]
+  end
+
+  test "limit_for if plan doesn't have feature" do
+    plan = PlanFeatures::Pricing.find_by_identifier(:free)
+    assert_equal 0, plan.limit_for(:paid_limit_feature)
   end
 end

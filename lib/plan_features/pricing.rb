@@ -63,7 +63,7 @@ module PlanFeatures
     end
 
     def limit_for(feature)
-      features.dig(feature.to_s, "limit")
+      features.dig(feature.to_s, "limit") || 0
     end
 
     def free?
