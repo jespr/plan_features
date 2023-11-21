@@ -43,7 +43,7 @@ module PlanFeatures
     end
 
     def current_and_previous_features
-      features.merge(previous_features)
+      previous_features.merge(features)
     end
 
     def has_feature?(feature, id: nil)
@@ -63,7 +63,7 @@ module PlanFeatures
     end
 
     def limit_for(feature)
-      features.dig(feature.to_s, "limit") || 0
+      current_and_previous_features.dig(feature.to_s, "limit") || 0
     end
 
     def free?

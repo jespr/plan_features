@@ -11,6 +11,9 @@ free:
     limit_feature:
       description: "Feature with a limit"
       limit: 10
+    limit_feature_two:
+      description: "Another feature with a limit"
+      limit: 5
 simple:
   name: "Simple"
   previous: free

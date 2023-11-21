@@ -1,3 +1,7 @@
+### 0.5.0
+
+- `limit_for` correctly inherit amounts from features on previous plans.
+
 ### 0.4.0
 
 - `limit_for` returns `0` instead of `nil` when called with a feature the plan doesn't have.

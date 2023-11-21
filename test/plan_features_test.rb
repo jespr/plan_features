@@ -28,7 +28,7 @@ class PlanFeaturesTest < ActiveSupport::TestCase
     assert second_plan.has_feature?("feature_b")
     assert second_plan.has_feature?("feature_c")
     assert_equal 3, second_plan.features.length
-    assert_equal 4, second_plan.previous_features.length
+    assert_equal 5, second_plan.previous_features.length
 
     third_plan = @plans.third
     assert_equal "Business", third_plan.name
@@ -68,7 +68,7 @@ class PlanFeaturesTest < ActiveSupport::TestCase
   test "display_features does not return hidden features" do
     plan = @plans.first
 
-    assert_equal 3, plan.display_features.length
+    assert_equal 4, plan.display_features.length
   end
 
   test "check the limit of a feature" do
@@ -87,5 +87,10 @@ class PlanFeaturesTest < ActiveSupport::TestCase
   test "limit_for if plan doesn't have feature" do
     plan = PlanFeatures::Pricing.find_by_identifier(:free)
     assert_equal 0, plan.limit_for(:paid_limit_feature)
+  end
+
+  test "limit_for inherits from previous plan" do
+    plan = PlanFeatures::Pricing.find_by_identifier(:simple)
+    assert_equal 5, plan.limit_for(:limit_feature_two)
   end
 end
